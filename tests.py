@@ -35,6 +35,10 @@ class TestPrice(unittest.TestCase):
         result = get_price("BTC", "ETH", DATA)
         self.assertEqual(result, (0, []))
 
+    def test_quote_is_base(self):
+        result = get_price("USDT", "USDT", DATA)
+        self.assertEqual(result, (1, ["USDT"]))
+
 
 if __name__ == '__main__':
     unittest.main()
