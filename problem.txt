@@ -1,0 +1,19 @@
+TICKERS = [
+    ("BTC", "EUR", 30_000),
+    ("BTC", "USDT", 35_000),
+    ("BNB", "BTC", 0.008),
+    ("ETH", "DAI", 2_100),
+          ]
+
+def get_price(base: str, quote: str, tickers: List[Tuple[str, str, float]]) -> float:
+    """
+        Given a list of price tickers, find the price between two arbitrary assets
+            - If there is a ticker of (base, quote, p), return p
+            - If there is a ticker of (quote, base, p), return 1.0 / p
+            - If there is no ticker of (base, quote, x) or (base, quote, x), but there are tickers like
+              (base, mid, x) and (mid, quote, y), then return x * y
+            - It is possible to take multiple hops to get the price. i.e. there are tickers like
+                  (base, mid1, x), (mid2, mid1, y), (mid2, quote, z), then return x * (1.0 / y) * z
+            - If there are multiple paths from base to quote, should calculate with the path of the **LEAST** number of hops
+            - If cannot find price between base and quote from tickers, return 0
+    """
